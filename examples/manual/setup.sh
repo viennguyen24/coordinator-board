@@ -12,11 +12,11 @@ for agent in a b; do
   if [[ $agent == a ]]; then
     id=agent-a
     label="A's Cursor"
-    profile=cursor
+    profile="${AGENT_A_PROFILE:-cursor}"
   else
     id=agent-b
-    label="B's Antigravity"
-    profile=antigravity
+    label="B's Cursor"
+    profile="${AGENT_B_PROFILE:-cursor}"
   fi
   cat >"$DIR/agent-$agent.config.json" <<EOF
 {
@@ -38,17 +38,24 @@ done
 
 cat <<EOF
 Wrote:
-  $DIR/agent-a.config.json  (acpx profile: cursor)
-  $DIR/agent-b.config.json  (acpx profile: antigravity)
+  $DIR/agent-a.config.json  (acpx profile: ${AGENT_A_PROFILE:-cursor})
+  $DIR/agent-b.config.json  (acpx profile: ${AGENT_B_PROFILE:-cursor})
 
 Board: https://github.com/$BOARD_REPO/issues/$BOARD_ISSUE
 Task:  https://github.com/$TASK_REPO/issues/2
 
+Same machine works with two agentIds + one GitHub login.
+Two Cursor IDE tabs do NOT talk to each other; communication is board comments.
+
 Prereqs (once):
   npm install
   gh auth status
-  npx acpx cursor sessions ensure --name smoke-cursor --cwd "$DIR/toy-project"
-  npx acpx antigravity sessions ensure --name smoke-antigravity --cwd "$DIR/toy-project"
+  # prove the chosen profiles can create sessions
+  npx acpx ${AGENT_A_PROFILE:-cursor} --cwd "$DIR/toy-project" sessions ensure --name smoke-a
+  npx acpx ${AGENT_B_PROFILE:-cursor} --cwd "$DIR/toy-project" sessions ensure --name smoke-b
+
+Optional mixed agents once Antigravity is installed:
+  AGENT_B_PROFILE=antigravity bash $DIR/setup.sh
 
 Terminal 1:
   node bin/coordinator.mjs run --config $DIR/agent-a.config.json
@@ -63,6 +70,6 @@ Add an exported ping() that returns "pong". Keep health().
 MSG
 
 Watch the board issue for Type: result comments. Inspect sessions with:
-  npx acpx cursor sessions
-  npx acpx antigravity sessions
+  npx acpx ${AGENT_A_PROFILE:-cursor} sessions
+  npx acpx ${AGENT_B_PROFILE:-cursor} sessions
 EOF
