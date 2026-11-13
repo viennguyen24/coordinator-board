@@ -1,0 +1,9 @@
+node_modules/
+.coordinator/
+.env
+.env.*
+*.pem
+/config.json
+/config-*.json
+examples/manual/state-*/
+**/host.lock/

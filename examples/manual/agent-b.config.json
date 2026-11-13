@@ -1,0 +1,14 @@
+{
+  "boardRepo": "viennguyen24/coordinator-board",
+  "boardIssue": 1,
+  "githubLogin": "viennguyen24",
+  "agentId": "agent-b",
+  "agentLabel": "B's Antigravity",
+  "agentProfile": "antigravity",
+  "projectDir": "/Users/viennguyen/hackprinceton/coordinator/examples/manual/toy-project",
+  "stateDir": "/Users/viennguyen/hackprinceton/coordinator/examples/manual/state-b",
+  "allowedSenders": ["viennguyen24"],
+  "allowedTaskRepos": ["viennguyen24/coordinator-board"],
+  "approveAll": true,
+  "pollSeconds": 10
+}

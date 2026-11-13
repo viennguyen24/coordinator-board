@@ -1,0 +1,10 @@
+{
+  "name": "hackathon-agent-coordinator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.13.0" },
+  "bin": { "coordinator": "bin/coordinator.mjs" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "dependencies": { "acpx": "0.22.0" }
+}
