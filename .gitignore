@@ -6,4 +6,5 @@ node_modules/
 /config.json
 /config-*.json
 examples/manual/state-*/
+examples/manual/logs/
 **/host.lock/
